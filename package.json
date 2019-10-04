@@ -2,13 +2,13 @@
   "name": "povio",
   "version": "1.0.0",
   "description": "Povio labs test project",
-  "main": "./dist/index.js",
+  "main": "./dist/app.js",
   "scripts": {
-    "build": "babel-node ./src --extensions '.ts,.tsx'",
+    "build": "babel-node ./src/app.ts --extensions '.ts'",
     "dev": "nodemon --verbose -e js,json,ts -i dist,node_modules --exec npm run build",
     "start": "npm run build && nodemon --verbose -i dist,node_modules -e js,json,ts",
     "check-types": "tsc -p .",
-    "prod": "babel ./src -d dist --extensions '.ts,.tsx' && node ./dist/index.js"
+    "prod": "babel ./src -d dist --extensions '.ts' && node ./dist/app.js"
   },
   "keywords": [
     "povio"
@@ -19,6 +19,7 @@
   },
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^8.1.0",
     "express": "^4.17.1"
   },
   "devDependencies": {
@@ -27,6 +28,7 @@
     "@babel/node": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
+    "@types/dotenv": "^6.1.1",
     "@types/express": "^4.17.1",
     "@types/node": "^12.7.11",
     "@typescript-eslint/eslint-plugin": "^2.3.2",
