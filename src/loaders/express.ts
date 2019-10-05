@@ -1,8 +1,8 @@
 import { Application } from 'express';
-import * as dotenv from 'dotenv';
-import Router from '../router';
+import bodyParser from 'body-parser';
+import Router from '../routes';
 
 export default (app: Application): void => {
-	dotenv.config();
 	app.use('/', Router);
+	app.use(bodyParser.json());
 }

@@ -24,11 +24,9 @@ module.exports = {
 		sourceType: 'module',
 	},
 	plugins: [
-		'@typescript-eslint',
-		'immutable'
+		'@typescript-eslint'
 	],
 	rules: {
-		'immutable/no-mutation': 2,
 		'indent': [2, "tab"],
 		'no-tabs': 0,
 		'arrow-parens': "off",

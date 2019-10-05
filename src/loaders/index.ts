@@ -1,9 +1,13 @@
 import { Application } from 'express';
-import expressLoader from './express';
+import ExpressLoader from './express';
+import dotenvLoader from './dotenv';
+import corsLoader from './cors';
 
 const init = (app: Application): void => {
 	const loaders: Array<Function> = [
-		expressLoader,
+		ExpressLoader,
+		dotenvLoader,
+		corsLoader,
 	];
 	loaders.forEach(l => l(app));
 };
