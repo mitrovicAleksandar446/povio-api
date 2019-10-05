@@ -28,6 +28,7 @@
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^1.7.0",
     "reflect-metadata": "^0.1.13",
+    "typedi": "^0.8.0",
     "typeorm": "^0.2.19"
   },
   "devDependencies": {
