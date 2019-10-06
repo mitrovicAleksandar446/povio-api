@@ -9,7 +9,6 @@ import UpdatePasswordSchema from '../http/inputs/user/schemas/UpdatePasswordSche
 import UserNotFoundError from '../http/errors/user/UserNotFoundError';
 import UserAlreadyLikedError from '../http/errors/user/UserAlreadyLikedError';
 
-
 @Service()
 export default class UserService {
 	private users: UserRepository;
