@@ -15,7 +15,7 @@ export default class AuthService {
 		this.users = users;
 	}
 
-	async createTokenFor(userLogin: UserLoginSchema) {
+	async createTokenFor(userLogin: UserLoginSchema): Promise<string> {
 		const user: User | undefined = await this.users.findOne({ where: { username: userLogin.username }, select: ['id', 'password'] });
 		if (!user) throw new UserNotFoundError();
 

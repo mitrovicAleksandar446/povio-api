@@ -1,5 +1,6 @@
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
+import { DeleteResult } from 'typeorm';
 import UserRepository from '../repositories/UserRepository';
 import LikeRepository from '../repositories/LikeRepository';
 import User from '../entities/User';
@@ -34,18 +35,18 @@ export default class UserService {
 		return this.users.findOne(userId);
 	}
 
-	async updateUserPassword(update: UpdatePasswordSchema) {
+	async updateUserPassword(update: UpdatePasswordSchema): Promise<void> {
 		const user: User = await this.users.findOne(update.id) as User;
 		user.password = update.password;
 		user.hashPassword();
 		await this.users.save(user);
 	}
 
-	async getUserWithLikes(id: number) {
+	async getUserWithLikes(id: number): Promise<User | undefined> {
 		return this.users.getUserWithLikes(id);
 	}
 
-	async like(likedId: number, likedById: number) {
+	async like(likedId: number, likedById: number): Promise<void> {
 		const liked: User | undefined = await this.users.findOne(likedId);
 		const likedBy: User = await this.users.findOne(likedById) as User;
 
@@ -61,11 +62,11 @@ export default class UserService {
 		}
 	}
 
-	async unlike(unliked: number, likedBy: number) {
+	async unlike(unliked: number, likedBy: number): Promise<DeleteResult> {
 		return this.likes.unlike(unliked, likedBy);
 	}
 
-	async getMostLikedUsers() {
+	async getMostLikedUsers(): Promise<User> {
 		return this.users.getMostLiked();
 	}
 }

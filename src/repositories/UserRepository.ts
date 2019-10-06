@@ -13,7 +13,7 @@ export default class UserRepository extends Repository<User> {
 			.getOne();
 	}
 
-	getMostLiked() {
+	getMostLiked(): Promise<User> {
 		return this.createQueryBuilder('u')
 			.leftJoin('likes', 'l', 'u.id = l.liked')
 			.select('u.id, u.username, count(l.liked) as num_of_likes')
