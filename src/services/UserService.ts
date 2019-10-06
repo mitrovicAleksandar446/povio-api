@@ -9,6 +9,7 @@ import NewUserSchema from '../http/inputs/user/schemas/NewUserSchema';
 import UpdatePasswordSchema from '../http/inputs/user/schemas/UpdatePasswordSchema';
 import UserNotFoundError from '../http/errors/user/UserNotFoundError';
 import UserAlreadyLikedError from '../http/errors/user/UserAlreadyLikedError';
+import UserAlreadyExistError from "../http/errors/user/UserAlreadyExistError";
 
 @Service()
 export default class UserService {
@@ -27,7 +28,11 @@ export default class UserService {
 		user.username = newUser.username;
 		user.password = newUser.password;
 		user.hashPassword();
-		await this.users.save(user);
+		try {
+			await this.users.save(user);
+		} catch (err) {
+			throw new UserAlreadyExistError();
+		}
 		return true;
 	}
 

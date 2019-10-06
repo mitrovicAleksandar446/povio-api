@@ -6,3 +6,6 @@ const app: Application = express();
 
 initApp(app);
 bootApp(app);
+
+// for testing
+module.exports = app;

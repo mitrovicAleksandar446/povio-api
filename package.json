@@ -8,7 +8,8 @@
     "dev": "nodemon --verbose -e js,json,ts -i dist,node_modules --exec npm run build",
     "start": "npm run build && nodemon --verbose -i dist,node_modules -e js,json,ts",
     "check-types": "tsc -p .",
-    "prod": "babel ./src -d dist --extensions '.ts' && node ./dist/app.js"
+    "prod": "babel ./src -d dist --extensions '.ts' && node ./dist/app.js",
+    "test": "NODE_ENV=test mocha --exit -r ts-node/register ./tests/**/*.ts"
   },
   "keywords": [
     "povio"
@@ -42,18 +43,24 @@
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
     "@types/bcryptjs": "^2.4.2",
+    "@types/chai": "^4.2.3",
     "@types/cors": "^2.8.6",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^4.17.1",
     "@types/jsonwebtoken": "^8.3.4",
+    "@types/mocha": "^5.2.7",
     "@types/node": "^12.7.11",
     "@typescript-eslint/eslint-plugin": "^2.3.2",
     "@typescript-eslint/parser": "^2.3.2",
     "babel-plugin-transform-typescript-metadata": "^0.2.2",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
+    "mocha": "^6.2.1",
     "nodemon": "^1.19.3",
+    "sqlite3": "^4.1.0",
     "ts-node": "^8.4.1",
     "typescript": "^3.6.3"
   }
