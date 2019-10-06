@@ -9,7 +9,7 @@ import NewUserSchema from '../http/inputs/user/schemas/NewUserSchema';
 import UpdatePasswordSchema from '../http/inputs/user/schemas/UpdatePasswordSchema';
 import UserNotFoundError from '../http/errors/user/UserNotFoundError';
 import UserAlreadyLikedError from '../http/errors/user/UserAlreadyLikedError';
-import UserAlreadyExistError from "../http/errors/user/UserAlreadyExistError";
+import UserAlreadyExistError from '../http/errors/user/UserAlreadyExistError';
 
 @Service()
 export default class UserService {
