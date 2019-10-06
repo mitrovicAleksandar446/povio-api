@@ -1,6 +1,22 @@
-export const type = process.env.DB_TYPE || 'mysql';
-export const host = process.env.DB_HOST || 'localhost';
-export const port = process.env.DB_PORT || 3306;
-export const username = process.env.DB_USERNAME || 'root';
-export const password = process.env.DB_PASSWORD || 'aleksa446';
-export const name = process.env.DB_NAME || 'povio';
+let config: object | null = null;
+
+export default (property?: string) => {
+	if (config !== null) {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+		// @ts-ignore
+		return !property ? config : config[property];
+	}
+	config = {
+		type: process.env.DB_TYPE,
+		host: process.env.DB_HOST || 'localhost',
+		port: process.env.DB_PORT || 3306,
+		username: process.env.DB_USERNAME || 'root',
+		password: process.env.DB_PASSWORD || 'aleksa446',
+		name: process.env.DB_NAME || 'povio',
+		sync: process.env.DB_SYNC || true,
+		logging: process.env.DB_LOGGING || true,
+	};
+	// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+	// @ts-ignore
+	return !property ? config : config[property];
+};

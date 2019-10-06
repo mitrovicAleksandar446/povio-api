@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
-import { secret as jwtSecret } from '../../../config/jwt';
+import config from '../../../config/jwt';
 import { error401 } from '../responses/errors';
 
 export default (req: Request, res: Response, next: NextFunction): Response | void => {
@@ -14,7 +14,7 @@ export default (req: Request, res: Response, next: NextFunction): Response | voi
 	const token: string = authorizationHeader.split(' ')[1].trim();
 
 	try {
-		res.locals.jwtPayload = jwt.verify(token, jwtSecret);
+		res.locals.jwtPayload = jwt.verify(token, config('secret'));
 	} catch (err) {
 		res.status(401).json(error401());
 		return;

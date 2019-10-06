@@ -5,30 +5,24 @@ import {
 	useContainer,
 } from 'typeorm';
 import { Container } from 'typedi';
-import {
-	type,
-	host,
-	port,
-	username,
-	password,
-	name as database,
-} from '../../config/db';
+import config from '../../config/db';
 
 export default async (): Promise<void> => {
+	const entities = process.env.NODE_ENV !== 'production'
+		? `${__dirname}/../entities/*.ts`
+		: `${__dirname}/../../dist/entities/*.js`;
 	// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 	// @ts-ignore
 	const options: ConnectionOptions = {
-		type: type as DatabaseType,
-		host,
-		port,
-		username,
-		password,
-		database,
-		entities: [
-			`${__dirname}/../entities/*.ts`,
-		],
-		synchronize: true,
-		logging: true,
+		type: config('type') as DatabaseType,
+		host: config('host'),
+		port: config('port'),
+		username: config('username'),
+		password: config('password'),
+		database: config('name'),
+		entities: [entities],
+		synchronize: Boolean(config('sync')),
+		logging: Boolean(config('logging')),
 	};
 	try {
 		useContainer(Container);

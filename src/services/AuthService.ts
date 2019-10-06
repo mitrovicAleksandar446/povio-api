@@ -4,7 +4,7 @@ import * as jwt from 'jsonwebtoken';
 import UserRepository from '../repositories/UserRepository';
 import User from '../entities/User';
 import UserLoginSchema from '../http/inputs/user/schemas/UserLoginSchema';
-import { secret } from '../../config/jwt';
+import config from '../../config/jwt';
 import UserNotFoundError from '../http/errors/user/UserNotFoundError';
 
 @Service()
@@ -23,7 +23,7 @@ export default class AuthService {
 
 		return jwt.sign(
 			{ id: user.id },
-			secret,
+			config('secret'),
 			{ expiresIn: '1h' },
 		);
 	}

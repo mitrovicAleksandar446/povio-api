@@ -4,7 +4,7 @@ import Router from '../routes';
 import { errorHandler, notFound } from '../http/handlers/errorHandlers';
 
 export default (app: Application): void => {
-	app.use(bodyParser.urlencoded());
+	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(bodyParser.json());
 	app.use('/', Router);
 	app.use(notFound);
