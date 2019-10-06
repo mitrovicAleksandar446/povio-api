@@ -25,11 +25,13 @@
     "cors": "^2.8.5",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
+    "express-validator": "^6.2.0",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^1.7.0",
     "reflect-metadata": "^0.1.13",
     "typedi": "^0.8.0",
-    "typeorm": "^0.2.19"
+    "typeorm": "^0.2.19",
+    "typeorm-typedi-extensions": "^0.2.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
