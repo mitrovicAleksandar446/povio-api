@@ -17,7 +17,7 @@ export default class User {
 	@Column({ length: 20 })
 	username!: string;
 
-	@Column({ length: 100 })
+	@Column({ length: 100, select: false })
 	password!: string;
 
 	@OneToMany(type => Like, like => like.userLiked)

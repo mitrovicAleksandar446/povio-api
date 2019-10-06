@@ -1,15 +1,22 @@
 import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
 import { secret as jwtSecret } from '../../../config/jwt';
-import { error } from '../responses/errors';
+import { error401 } from '../responses/errors';
 
 export default (req: Request, res: Response, next: NextFunction): Response | void => {
-	const token: string = req.headers.authorization as string;
+	const authorizationHeader: string | undefined = req.headers.authorization;
+
+	if (authorizationHeader === undefined) {
+		res.status(401).json(error401());
+		return;
+	}
+
+	const token: string = authorizationHeader.split(' ')[1].trim();
 
 	try {
-		jwt.verify(token, jwtSecret);
+		res.locals.jwtPayload = jwt.verify(token, jwtSecret);
 	} catch (err) {
-		res.status(401).json(error('Unauthorized'));
+		res.status(401).json(error401());
 		return;
 	}
 
