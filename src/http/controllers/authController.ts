@@ -6,6 +6,7 @@ import NewUser from '../inputs/user/NewUser';
 import { success201, data } from '../responses/success';
 import UserLogin from '../inputs/user/UserLogin';
 import AuthService from '../../services/AuthService';
+import UpdatePassword from "../inputs/user/UpdatePassword";
 
 const signUp = async (req: Request, res: Response) => {
 	const errors = validationResult(req);
@@ -36,8 +37,21 @@ const me = async (req: Request, res: Response) => {
 	return res.json(data(user));
 };
 
+const updatePassword = async (req: Request, res: Response) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) return res.status(422).json(errors);
+
+	const { password } = req.body;
+	const userId = res.locals.jwtPayload.id;
+	const update = new UpdatePassword(password, userId);
+	const userService = Container.get<UserService>(UserService);
+	await userService.updateUserPassword(update);
+	return res.status(204).send();
+};
+
 export {
 	signUp,
 	login,
 	me,
+	updatePassword,
 }

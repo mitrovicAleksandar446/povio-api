@@ -30,7 +30,7 @@ export default class User {
 		this.password = bcrypt.hashSync(this.password, 8);
 	}
 
-	checkIfUnencryptedPasswordIsValid(password: string): boolean {
+	checkIfPasswordIsValid(password: string): boolean {
 		return bcrypt.compareSync(password, this.password);
 	}
 }

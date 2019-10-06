@@ -5,7 +5,7 @@ import UserRepository from '../repositories/UserRepository';
 import User from '../entities/User';
 import UserLoginSchema from '../http/inputs/user/schemas/UserLoginSchema';
 import { secret } from '../../config/jwt';
-import UserNotFoundError from '../errors/user/UserNotFoundError';
+import UserNotFoundError from '../http/errors/user/UserNotFoundError';
 
 @Service()
 export default class AuthService {
@@ -19,7 +19,7 @@ export default class AuthService {
 		const user: User | undefined = await this.users.findOne({ where: { username: userLogin.username }, select: ['id', 'password'] });
 		if (!user) throw new UserNotFoundError();
 
-		if (!user.checkIfUnencryptedPasswordIsValid(userLogin.password)) throw new UserNotFoundError();
+		if (!user.checkIfPasswordIsValid(userLogin.password)) throw new UserNotFoundError();
 
 		return jwt.sign(
 			{ id: user.id },

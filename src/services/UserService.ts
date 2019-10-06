@@ -3,6 +3,7 @@ import { InjectRepository } from 'typeorm-typedi-extensions';
 import UserRepository from '../repositories/UserRepository';
 import User from '../entities/User';
 import NewUserSchema from '../http/inputs/user/schemas/NewUserSchema';
+import UpdatePasswordSchema from '../http/inputs/user/schemas/UpdatePasswordSchema';
 
 @Service()
 export default class UserService {
@@ -23,5 +24,12 @@ export default class UserService {
 
 	get(userId: number): Promise<User | undefined> {
 		return this.users.findOne(userId);
+	}
+
+	async updateUserPassword(update: UpdatePasswordSchema) {
+		const user: User = await this.users.findOne(update.id) as User;
+		user.password = update.password;
+		user.hashPassword();
+		await this.users.save(user);
 	}
 }
