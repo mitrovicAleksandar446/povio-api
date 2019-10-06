@@ -6,7 +6,7 @@ import NewUser from '../inputs/user/NewUser';
 import { success201, data } from '../responses/success';
 import UserLogin from '../inputs/user/UserLogin';
 import AuthService from '../../services/AuthService';
-import UpdatePassword from "../inputs/user/UpdatePassword";
+import UpdatePassword from '../inputs/user/UpdatePassword';
 
 const signUp = async (req: Request, res: Response) => {
 	const errors = validationResult(req);
